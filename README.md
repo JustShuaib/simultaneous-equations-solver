@@ -1,4 +1,4 @@
-# simulatenous-equations-solver
+# simultaneous-equations-solver
 
 The purpose of this code is to be able to solve a simultaneous linear equation using either substitution or elimination method.
 
