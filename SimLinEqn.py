@@ -1,5 +1,5 @@
 # SIMULTANEOUS EQUATION SOLVER
-# EXAMPLE OF A SIMULATANEOUS EQUATION
+# EXAMPLE OF A SIMULTANEOUS EQUATION
 # x + y = 8
 # 2x + 5y = 14
 # Find x and y
@@ -10,6 +10,7 @@ def linear_simultaneous_equation():
     # sign10 is the sign of the first coefficient in equation_2
     # sign11 is the sign of the second coefficient in equation_2
     # sign1 is the sign of the result in equation_2
+
     while True:
         sign00 = input("Sign of the first coefficient in eqn1 (type in plus or minus): ")
         sign00 = sign00.lower()
@@ -123,22 +124,22 @@ def linear_simultaneous_equation():
             print("Only numbers allowed")
 
     # converting the integers to strings so the equations can be printed
-    x1 = str(x1_coef) + "x"
-    y1 = str(y1_coef) + "y"
-    x2 = str(x2_coef) + "x"
-    y2 = str(y2_coef) + "x"
-    eqn1 = str(x1_y1_result)
-    eqn2 = str(x2_y2_result)
+    x1_show = str(x1_coef) + "x"
+    y1_show = str(y1_coef) + "y"
+    x2_show = str(x2_coef) + "x"
+    y2_show = str(y2_coef) + "x"
+    eqn1_show = str(x1_y1_result)
+    eqn2_show = str(x2_y2_result)
 
     # printing out the equations for confirmation
     if sign01 == "plus":
-        equation_1 = x1 + "+" + y1 + "=" + eqn1 + "----- (1)"
+        equation_1 = x1_show + "+" + y1_show + "=" + eqn1_show + "----- (1)"
     elif sign01 == "minus":
-        equation_1 = x1 + y1 + "=" + eqn1 + "----- (1)"
+        equation_1 = x1_show + y1_show + "=" + eqn1_show + "----- (1)"
     if sign11 == "plus":
-        equation_2 = x2 + "+" + y2 + "=" + eqn2 + "----- (2)"
+        equation_2 = x2_show + "+" + y2_show + "=" + eqn2_show + "----- (2)"
     elif sign11 == "minus":
-        equation_2 = x2 + y2 + "=" + eqn2 + "----- (1)"
+        equation_2 = x2_show + y2_show + "=" + eqn2_show + "----- (1)"
 
     print("\n")
     print("Your simultaneous equation is: ")
@@ -246,7 +247,74 @@ def linear_simultaneous_equation():
             x = new_result / x1_coef
             print(f"X = {x}")
 
-  
+    # USING SUBSTITUTION METHOD
+    # This is used when no coefficients of either variables are found to be the same
+
+    elif x1_coef_positive == 1:
+        # during the substitution method, after making x the subject of equation 1
+        # the num variable is the multiplication of the coefficient of x in equation 2
+        # and the first value "7" using a sample equation (x = 7 + 5y)
+
+        # num_y1 is the multiplication of x_coef in equation 2 and the coefficient of y in the
+        # sample equation above
+
+        # num_y then becomes the addition of num_y1 and the coefficient of y in equation 2
+        # which is also known as the addition of like terms (y in this scenario)
+        num = x2_coef * x1_y1_result
+        num_y1 = x2_coef * -y1_coef
+        num_y = num_y1 + y2_coef
+        num_y = -num_y
+        new_result = num - x2_y2_result
+        y = new_result / num_y
+        print(f"Y = {y}")
+
+        x = x1_y1_result - (y1_coef * y)
+        print(f"X = {x}")
+
+    elif y1_coef_positive == 1:
+        num = y2_coef * x1_y1_result
+        num_x1 = y2_coef * -x1_coef
+        num_x = num_x1 + x2_coef
+        num_x = -num_x
+        new_result = num - x2_y2_result
+        x = new_result / num_x
+        print(f"X = {x}")
+
+        y = x1_y1_result - (x1_coef * x)
+        print(f"Y = {y}")
+
+    elif x2_coef_positive == 1:
+        num = x1_coef * x2_y2_result
+        num_y1 = x1_coef * -y2_coef
+        num_y = num_y1 + y1_coef
+        num_y = -num_y
+        new_result = num - x1_y1_result
+        y = new_result / num_y
+        print(f"Y = {y}")
+
+        x = x2_y2_result - (y2_coef * y)
+        print(f"X = {x}")
+
+    elif y2_coef_positive == 1:
+        num = y1_coef * x2_y2_result
+        num_x1 = y1_coef * -x2_coef
+        num_x = num_x1 + x1_coef
+        num_x = -num_x
+        new_result = num - x1_y1_result
+        x = new_result / num_x
+        print(f"X = {x}")
+
+        y = x2_y2_result - (x2_coef * x)
+        print(f"Y = {y}")
+
+    else:
+        x_upper = ((x1_y1_result * y2_coef) - (x2_y2_result * y1_coef))
+        x_lower = ((x1_coef * y2_coef) - (x2_coef * y1_coef))
+        x = x_upper / x_lower
+        print(f"X = {x}")
+
+        y = (x1_y1_result - (x1_coef * x)) / y1_coef
+        print(f"Y = {y}")
 
 
 linear_simultaneous_equation()
