@@ -19,6 +19,7 @@ def linear_simultaneous_equation():
             break
         else:
             print("Sign not valid")
+
     while True:
         try:
             x1_coef = int(input("Type in the coefficient of x1 here: "))
@@ -27,6 +28,7 @@ def linear_simultaneous_equation():
             break
         except ValueError as e:
             print("Only numbers allowed")
+
     while True:
         sign01 = input("Sign of the second coefficient in eqn1(type in plus or minus): ")
         sign01 = sign01.lower()
@@ -36,6 +38,7 @@ def linear_simultaneous_equation():
             break
         else:
             print("Sign not valid")
+
     while True:
         try:
             y1_coef = int(input("Type in the coefficient of y1 here: "))
@@ -53,6 +56,7 @@ def linear_simultaneous_equation():
             break
         else:
             print("Sign not valid")
+
     while True:
         try:
             x1_y1_result = int(input("Type in the result of equation 1 here: "))
@@ -61,6 +65,7 @@ def linear_simultaneous_equation():
             break
         except ValueError as e:
             print("Only numbers allowed")
+
     while True:
         sign10 = input("Sign of the first coefficient in eqn2 (type in plus or minus): ")
         sign10 = sign10.lower()
@@ -70,6 +75,7 @@ def linear_simultaneous_equation():
             break
         else:
             print("Sign not valid")
+
     while True:
         try:
             x2_coef = int(input("Type in the coefficient of x2 here: "))
@@ -78,6 +84,7 @@ def linear_simultaneous_equation():
             break
         except ValueError as e:
             print("Only numbers allowed")
+
     while True:
         sign11 = input("Sign of the second coefficient in eqn2 (type in plus or minus): ")
         sign11 = sign11.lower()
@@ -87,6 +94,7 @@ def linear_simultaneous_equation():
             break
         else:
             print("Sign not valid")
+
     while True:
         try:
             y2_coef = int(input("Type in the coefficient of y2 here: "))
@@ -95,14 +103,16 @@ def linear_simultaneous_equation():
             break
         except ValueError as e:
             print("Only numbers allowed")
+
     while True:
-        sign1 = input("Sign of eqn2(type in plus or minus): ")
+        sign1 = input("Sign of the result in eqn2(type in plus or minus): ")
         if sign1 == "plus":
             break
         elif sign1 == "minus":
             break
         else:
             print("Sign not valid")
+
     while True:
         try:
             x2_y2_result = int(input("Type in the result of equation 2 here: "))
@@ -111,12 +121,16 @@ def linear_simultaneous_equation():
             break
         except ValueError as e:
             print("Only numbers allowed")
+
+    # converting the integers to strings so the equations can be printed
     x1 = str(x1_coef) + "x"
     y1 = str(y1_coef) + "y"
     x2 = str(x2_coef) + "x"
     y2 = str(y2_coef) + "x"
     eqn1 = str(x1_y1_result)
     eqn2 = str(x2_y2_result)
+
+    # printing out the equations for confirmation
     if sign01 == "plus":
         equation_1 = x1 + "+" + y1 + "=" + eqn1 + "----- (1)"
     elif sign01 == "minus":
@@ -125,12 +139,16 @@ def linear_simultaneous_equation():
         equation_2 = x2 + "+" + y2 + "=" + eqn2 + "----- (2)"
     elif sign11 == "minus":
         equation_2 = x2 + y2 + "=" + eqn2 + "----- (1)"
+
     print("\n")
     print("Your simultaneous equation is: ")
     print(equation_1)
     print(equation_2)
     print("Solving simultaneous equation...")
-    # USING ELIMINATION METHOD IF EITHER X1, X2 OR Y1, Y2 HAVE SAME COEFFICIENT AND DIFFERENT SIGNS
+    # USING ELIMINATION METHOD
+
+    # creating a new variable to convert the coefficients of each variable to positive
+    # to enable for comparison of the coefficients of the variables
     if y1_coef < 0:
         y1_coef_positive = -1 * y1_coef
     else:
@@ -147,26 +165,51 @@ def linear_simultaneous_equation():
         x2_coef_positive = -1 * x2_coef
     else:
         x2_coef_positive = x2_coef
+
+    # using elimination method if the coefficients of variable y are the same but with
+    # different signs e.g + and -
     if y1_coef_positive == y2_coef_positive:
         if sign01 != sign11:
+            # adding the coefficients of the variable x together after y has been eliminated
+            # from the equation
             x_coef = x1_coef + x2_coef
+
+            # Adding the results of both equations.
             result = x1_y1_result + x2_y2_result
+            # dividing the added result by the added coefficients of x to get the value of x
             x = result / x_coef
             print(f"X = {x}")
+
+            # FINDING THE VALUE OF Y
+
+            # Multiplying the coefficient of x in equation 1 by the value of x gotten from the
+            # equation.
             x_new_eqn = x1_coef * x
+
+            # this block of code checks if the new number gotten from the multiplication of x and it's coefficient
+            # is negative. In maths, when a number is taken to the other side of an "=", the sign is inverted from
+            # either positive to negative. Since the resulting value of x_new_eqn is negative, it is multiplied by
+            # "-" to convert it to positive as seen in (-x_new_eqn) which is just short of -1 * x_new_eqn.
             if x_new_eqn < 0:
                 new_result = x1_y1_result + (-x_new_eqn)
             else:
+                # if x_new_eqn is positive, it is subtracted from the equation value of eqn(1)
                 new_result = x1_y1_result - x_new_eqn
             y = new_result / y1_coef
             print(f"Y = {y}")
-            
+
+        # This is the code that is executed when the signs of the coefficients of y in both equations
+        # are the same.
         elif sign01 == sign11:
+            # Subtracting the coefficients of x in both equations and the results of both equations after y has been
+            # eliminated from the equation.
             x_coef = x2_coef - x1_coef
+            # Subtracting the results of both equations.
             result = x2_y2_result - x1_y1_result
+            # Dividing the result of the equation by the coefficient of x to get the value of x.
             x = result / x_coef
             print(f"X= {x}")
-            
+
             x_new_eqn = x1_coef * x
             if x_new_eqn < 0:
                 new_result = x1_y1_result + (-x_new_eqn)
@@ -174,6 +217,7 @@ def linear_simultaneous_equation():
                 new_result = x1_y1_result - x_new_eqn
             y = new_result / y1_coef
             print(f"Y = {y}")
+
     elif x1_coef_positive == x2_coef_positive:
         if sign00 != sign10:
             y_coef = y1_coef + y2_coef
@@ -187,20 +231,22 @@ def linear_simultaneous_equation():
                 new_result = x1_y1_result - y_new_eqn
             x = new_result / x1_coef
             print(f"X = {x}")
-          
+
         elif sign00 == sign10:
-          y_coef = y2_coef - y1_coef
-          result = x2_y2_result - x1_y1_result
-          y = result / y_coef
-          print(f"Y = {y}")
-            
-          y_new_eqn = y1_coef * y
-          if y_new_eqn < 0:
-             new_result = x1_y1_result + (-y_new_eqn)
-          else:
-             new_result = x1_y1_result - y_new_eqn
-          x = new_result / x1_coef
-          print(f"X = {x}")
-    
-    
+            y_coef = y2_coef - y1_coef
+            result = x2_y2_result - x1_y1_result
+            y = result / y_coef
+            print(f"Y = {y}")
+
+            y_new_eqn = y1_coef * y
+            if y_new_eqn < 0:
+                new_result = x1_y1_result + (-y_new_eqn)
+            else:
+                new_result = x1_y1_result - y_new_eqn
+            x = new_result / x1_coef
+            print(f"X = {x}")
+
+  
+
+
 linear_simultaneous_equation()
