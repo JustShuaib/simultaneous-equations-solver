@@ -1,4 +1,24 @@
-"using strict";
+// *********** SHUAIB **********
+const equ1x = document.getElementById("equ-1-x"),
+  equ1y = document.getElementById("equ-1-y"),
+  equ1Ans = document.getElementById("equ-1"),
+  equ2x = document.getElementById("equ-2-x"),
+  equ2y = document.getElementById("equ-2-y"),
+  equ2Ans = document.getElementById("equ-2"),
+  form = document.getElementById("form");
+form.addEventListener("submit", calculateValues);
+function calculateValues(e) {
+  const x1 = Number(equ1x.value),
+    y1 = Number(equ1y.value),
+    z1 = Number(equ1Ans.value),
+    x2 = Number(equ2x.value),
+    y2 = Number(equ2y.value),
+    z2 = Number(equ2Ans.value);
+  console.log(x1, y1, z1);
+  console.log(x2, y2, z2);
+  e.preventDefault();
+}
+("using strict");
 
 /*
 SIMULTANEOUS EQUATION SOLVER
@@ -55,9 +75,9 @@ const userInput = function () {
   x2y2Result = Number(prompt("Input the result of eqn2: "));
 };
 
-userInput();
+// userInput();
 
-if (sign00 === "-") {
+/* if (sign00 === "-") {
   x1Coef = -x1Coef;
 } else if (!sign00 === "-" || !sign00 === "+") {
   alert("Invalid sign, refresh the page to start again!");
@@ -92,7 +112,7 @@ if (sign1 === "-") {
 } else if (!sign1 === "-" || !sign00 === "+") {
   alert("Invalid sign, refresh the page to start again!");
 }
-
+ */
 // Convert the integers to strings so that the equations can be printed
 let showX1 = String(x1Coef) + "x";
 let showY1 = String(y1Coef) + "y";
@@ -103,7 +123,7 @@ let showEqn2 = String(x2y2Result);
 
 // Showing an alert for confirmation of the equation
 
-if (sign01 === "+") {
+/* if (sign01 === "+") {
   alert(`${showX1} + ${showY1} = ${showEqn1} ------ (1)`);
 } else if (sign01 === "-") {
   alert(`${showX1}${showY1} = ${showEqn1} ------ (1)`);
@@ -112,7 +132,7 @@ if (sign11 === "+") {
   alert(`${showX2} + ${showY2} = ${showEqn2} ------ (2)`);
 } else if (sign11 === "-") {
   alert(`${showX2} ${showY2} = ${showEqn2} ------ (2)`);
-}
+} */
 
 // Using elimination method
 // Convert the coefficients of each variable to positive so that there can be easy comparison of the coefficients of the variables
@@ -151,7 +171,7 @@ if (y1CoefPositive === y2CoefPositive && sign01 !== sign11) {
 
   // Divide the added result by the added coefficients of x to get the total value of x
   xResult = totalResult / xCoef;
-  alert(`f(x) = ${xResult}`);
+  // alert(`f(x) = ${xResult}`);
 
   // Finding the value of y
   // Multiply the coefficient of x in eqn 1 by the value of x gotten from the result
@@ -165,13 +185,13 @@ if (y1CoefPositive === y2CoefPositive && sign01 !== sign11) {
     newResult1 = x1y1Result - xNewEqn;
   }
   yResult = newResult1 / y1Coef;
-  alert(`f(y) = ${yResult}`);
+  // alert(`f(y) = ${yResult}`);
   // If the signs of the coefficients of y are the same, then
 } else if (y1CoefPositive === y2CoefPositive && sign01 === sign11) {
   xCoef = x2Coef - x1Coef;
   totalResult = x2y2Result - x1y1Result;
   xResult = totalResult / xCoef;
-  alert(`f(x) = ${xResult}`);
+  // alert(`f(x) = ${xResult}`);
 
   xNewEqn = x1Coef * xResult;
   if (xNewEqn < 0) {
@@ -180,12 +200,12 @@ if (y1CoefPositive === y2CoefPositive && sign01 !== sign11) {
     newResult1 = x1y1Result - xNewEqn;
   }
   yResult = newResult1 / y1Coef;
-  alert(`f(y) = ${yResult}`);
+  // alert(`f(y) = ${yResult}`);
 } else if (x1CoefPositive === x2CoefPositive && sign00 !== sign10) {
   yCoef = y1Coef + y2Coef;
   totalResult = x1y1Result + x2y2Result;
   yResult = totalResult / yCoef;
-  alert(`f(y) = ${yResult}`);
+  // alert(`f(y) = ${yResult}`);
   yNewEqn = y1Coef * yResult;
 
   if (yNewEqn < 0) {
@@ -194,12 +214,12 @@ if (y1CoefPositive === y2CoefPositive && sign01 !== sign11) {
     newResult1 = x1y1Result - yNewEqn;
   }
   xResult = newResult1 / x1Coef;
-  alert(`f(x) = ${xResult}`);
+  // alert(`f(x) = ${xResult}`);
 } else if (x1CoefPositive === x2CoefPositive && sign00 === sign10) {
   yCoef = y2Coef - y1Coef;
   totalResult = x2y2Result - x1y1Result;
   yResult = totalResult / yCoef;
-  alert(`f(y) = ${yResult}`);
+  // alert(`f(y) = ${yResult}`);
 
   yNewEqn = y1Coef * yResult;
   if (yNewEqn < 0) {
@@ -208,7 +228,7 @@ if (y1CoefPositive === y2CoefPositive && sign01 !== sign11) {
     newResult1 = x1y1Result - yNewEqn;
   }
   xResult = newResult1 / x1Coef;
-  alert(`f(x) = ${xResult}`);
+  // alert(`f(x) = ${xResult}`);
 } else if (
   x1CoefPositive !== x2CoefPositive &&
   y1CoefPositive !== y2CoefPositive
@@ -223,8 +243,8 @@ if (y1CoefPositive === y2CoefPositive && sign01 !== sign11) {
     newResult1 = numResult - x2y2Result;
     yResult = newResult1 / numY;
     xResult = x1y1Result - y1Coef * yResult;
-    alert(`f(y) = ${yResult}
-    f(x) = ${xResult}`);
+    // alert(`f(y) = ${yResult}
+    // f(x) = ${xResult}`);
   } else if (y1CoefPositive === 1) {
     numResult = y2Coef * x1y1Result;
     numX1 = y2Coef * -x1Coef;
@@ -233,8 +253,8 @@ if (y1CoefPositive === y2CoefPositive && sign01 !== sign11) {
     newResult1 = numResult - x2y2Result;
     xResult = newResult1 / numX;
     yResult = x1y1Result - x1Coef * xResult;
-    alert(`f(x) = ${xResult}
-    f(y) = ${yResult}`);
+    // alert(`f(x) = ${xResult}
+    // f(y) = ${yResult}`);
   } else if (x2CoefPositive === 1) {
     numResult = x1Coef * x2y2Result;
     numY1 = x1Coef * -y2Coef;

@@ -139,7 +139,7 @@ def linear_simultaneous_equation():
     if sign11 == "plus":
         equation_2 = x2_show + "+" + y2_show + "=" + eqn2_show + "----- (2)"
     elif sign11 == "minus":
-        equation_2 = x2_show + y2_show + "=" + eqn2_show + "----- (1)"
+        equation_2 = x2_show + y2_show + "=" + eqn2_show + "----- (2)"
 
     print("\n")
     print("Your simultaneous equation is: ")
