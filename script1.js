@@ -5,29 +5,67 @@ const equ1x = document.getElementById("equ-1-x"),
   equ2x = document.getElementById("equ-2-x"),
   equ2y = document.getElementById("equ-2-y"),
   equ2Ans = document.getElementById("equ-2"),
+  output = document.getElementById("result"),
   form = document.getElementById("form");
+
 form.addEventListener("submit", calculateValues);
+function resetInputFields() {
+  equ1x.value = "";
+  equ1y.value = "";
+  equ1Ans.value = "";
+  equ2x.value = "";
+  equ2y.value = "";
+  equ2Ans.value = "";
+}
+
 function calculateValues(e) {
-  const x1 = Number(equ1x.value),
+  let x1 = Number(equ1x.value),
     y1 = Number(equ1y.value),
     z1 = Number(equ1Ans.value),
     x2 = Number(equ2x.value),
     y2 = Number(equ2y.value),
     z2 = Number(equ2Ans.value);
-  console.log(x1, y1, z1);
-  console.log(x2, y2, z2);
+  /*
+    SIMULTANEOUS EQUATION SOLVER
+  
+  E.g of a simultaneous equation
+  x + y = 8
+  2x + 5y = 14
+  find the values of x and y
+  */
+  // ? Check if any of the two x & y are equal i.e if x1 = x2 or y1 = y2
+  const factorOne = x1,
+    factorTwo = x2;
+  // ? Multiply equ2 through by either of the coefficient of equ1, (x1 in this case)
+  let newx2 = x2 * factorOne,
+    newy2 = y2 * factorOne,
+    newz2 = z2 * factorOne,
+    // ? Multiply equ1 by either of coefficent of equ2, (x2 in this case)
+    newx1 = x1 * factorTwo,
+    newy1 = y1 * factorTwo,
+    newz1 = z1 * factorTwo;
+  // ? If x1 + x2 = 0 then add y1 + y2 (which gives y3) and z1 + z2 (which gives z3) ; else y1 - y2 and z1 - z2
+  let y3, z3;
+  if (newx1 + newx2 === 0) {
+    (y3 = newy1 + newy2), (z3 = newz1 + newz2);
+  } else {
+    (y3 = newy1 - newy2), (z3 = newz1 - newz2);
+  }
+  // ? Divide z3 by y3 => Which gives y
+  const y = z3 / y3;
+  // ? x = z1 - (y1 * y)
+  const x = (z1 - y1 * y) / x1;
+  // ? The solutions are x and y
+  console.log(newx1, newy1, newz1);
+  console.log(newx2, newy2, newz2);
+  console.log(y3, z3);
+  console.log(x, y);
+  output.textContent = `The value of x is ${x}, the value of y is ${y}`;
+  // resetInputFields();
   e.preventDefault();
 }
+
 ("using strict");
-
-/*
-SIMULTANEOUS EQUATION SOLVER
-
-E.g of a simultaneous equation
-x + y = 8
-2x + 5y = 14
-find the values of x and y
-*/
 
 let sign00,
   sign01,
