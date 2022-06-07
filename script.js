@@ -50,17 +50,21 @@ function calculateValues(e) {
     (z1 = z1 * factorTwo);
   //  If x1 + x2 = 0 then add y1 + y2 (which gives y3) and z1 + z2 (which gives z3) ; else y1 - y2 and z1 - z2
   let y3, z3;
-  if (x1 + x2 === 0) {
-    (y3 = y1 + y2), (z3 = z1 + z2);
-  } else {
-    (y3 = y1 - y2), (z3 = z1 - z2);
-  }
+  if (x1 + x2 === 0) (y3 = y1 + y2), (z3 = z1 + z2);
+  else (y3 = y1 - y2), (z3 = z1 - z2);
+
   //  Divide z3 by y3 which gives y
   const y = z3 / y3;
   //  x = (z1 - y1 * y)/ x1
   const x = (z1 - y1 * y) / x1;
+
+  const formatResult = (num) => {
+    if (num.toString().length > 3) return num.toFixed(3);
+    return num;
+  };
   //  The solutions are x and y
-  output.textContent = x && y ? `x = ${x}, y = ${y}` : "";
+  output.textContent =
+    x && y ? `x = ${formatResult(x)}, y = ${formatResult(y)}` : "";
   resetInputFields(); //clear the input field after submission
   e.preventDefault();
 }
